@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green Harvest — Agricultural Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --soil: #0d1220;
+    --bark: #131d30;
+    --olive: #162040;
+    --leaf: #4e6b22;
+    --lime: #6abf3e;
+    --teal: #1ab8c4;
+    --navy: #1a2f5e;
+    --wheat: #3a8fd4;
+    --cream: #e8eef8;
+    --mist: #eef3e4;
+    --white: #ffffff;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--soil);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(26,18,8,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122,173,46,0.15);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--lime);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--wheat); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--lime); }
+
+  .nav-cta {
+    background: var(--lime);
+    color: var(--soil) !important;
+    opacity: 1 !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--wheat) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 4rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--lime);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--lime);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(245,240,225,0.65);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+
+  .btn-primary {
+    background: var(--lime);
+    color: var(--soil);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--wheat); transform: translateY(-1px); }
+
+  .btn-outline {
+    border: 1px solid rgba(245,240,225,0.3);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    padding: 0.9rem 2rem;
+    background: transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--lime); color: var(--lime); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245,240,225,0.1);
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--lime);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: rgba(245,240,225,0.5);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Hero right — visual */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-field {
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(106,191,62,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 70%, rgba(26,184,196,0.1) 0%, transparent 50%),
+      linear-gradient(160deg, #080e1c 0%, #0d1628 50%, #060c18 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .field-illustration {
+    width: 80%;
+    max-width: 480px;
+    position: relative;
+  }
+
+  /* Big decorative circle */
+  .circle-glow {
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    border: 1px solid rgba(106,191,62,0.2);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  .circle-glow::after {
+    content: '';
+    position: absolute; inset: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(26,184,196,0.15);
+    animation: pulse 4s ease-in-out infinite reverse;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%,-50%) scale(1.04); opacity: 1; }
+  }
+
+  /* SVG plant icon center */
+  .plant-icon {
+    width: 160px; height: 160px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    z-index: 2;
+    animation: float 5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  /* Floating tags */
+  .float-tag {
+    position: absolute;
+    background: rgba(13,18,32,0.92);
+    border: 1px solid rgba(26,184,196,0.35);
+    border-radius: 4px;
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--teal);
+    white-space: nowrap;
+    animation: floatTag 6s ease-in-out infinite;
+  }
+
+  .float-tag:nth-child(1) { top: 18%; left: 5%; animation-delay: 0s; }
+  .float-tag:nth-child(2) { top: 55%; right: 3%; animation-delay: 1.5s; }
+  .float-tag:nth-child(3) { bottom: 18%; left: 10%; animation-delay: 3s; }
+
+  @keyframes floatTag {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* PRODUCTS */
+  .section { padding: 7rem 4rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lime);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 28px; height: 1px; background: var(--lime);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    max-width: 520px;
+    margin-bottom: 3.5rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(122,173,46,0.12);
+    border: 1px solid rgba(122,173,46,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .product-card {
+    background: var(--bark);
+    padding: 2.5rem 2rem;
+    transition: background 0.25s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--lime);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .product-card:hover { background: #3a2a12; }
+  .product-card:hover::before { transform: scaleX(1); }
+
+  .product-icon {
+    width: 48px; height: 48px;
+    background: rgba(122,173,46,0.12);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .product-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .product-desc {
+    font-size: 0.85rem;
+    color: rgba(245,240,225,0.5);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .product-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--lime);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  /* WHY CHOOSE */
+  .why-section {
+    background: #0f1828;
+    padding: 7rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .feature-list { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+
+  .feature-item { display: flex; gap: 1.25rem; align-items: flex-start; }
+
+  .feature-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--lime);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .feature-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.35rem;
+  }
+
+  .feature-text {
+    font-size: 0.85rem;
+    color: rgba(245,240,225,0.55);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .why-visual {
+    background: rgba(26,18,8,0.4);
+    border: 1px solid rgba(122,173,46,0.2);
+    border-radius: 4px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .metric-row {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+
+  .metric-header { display: flex; justify-content: space-between; align-items: center; }
+
+  .metric-label { font-size: 0.8rem; color: rgba(245,240,225,0.6); font-weight: 400; }
+  .metric-value { font-size: 0.85rem; color: var(--lime); font-weight: 500; }
+
+  .metric-bar {
+    height: 5px;
+    background: rgba(122,173,46,0.15);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .metric-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--leaf), var(--lime));
+    border-radius: 99px;
+    animation: barGrow 1.5s ease-out forwards;
+    width: 0;
+  }
+
+  @keyframes barGrow {
+    to { width: var(--target-width); }
+  }
+
+  /* AUDIENCE */
+  .audience-section {
+    padding: 7rem 4rem;
+    background: var(--soil);
+  }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .audience-card {
+    border: 1px solid rgba(122,173,46,0.15);
+    border-radius: 4px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--bark);
+    transition: border-color 0.25s;
+  }
+
+  .audience-card:hover { border-color: rgba(122,173,46,0.4); }
+
+  .audience-tag {
+    display: inline-block;
+    background: rgba(122,173,46,0.12);
+    color: var(--lime);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  .audience-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .audience-text {
+    font-size: 0.875rem;
+    color: rgba(245,240,225,0.55);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .audience-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .audience-benefits li {
+    font-size: 0.82rem;
+    color: rgba(245,240,225,0.65);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .audience-benefits li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--lime);
+  }
+
+  /* CTA STRIP */
+  .cta-strip {
+    background: var(--lime);
+    padding: 5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .cta-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--soil);
+    max-width: 520px;
+    line-height: 1.2;
+  }
+
+  .btn-dark {
+    background: var(--soil);
+    color: var(--lime);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+  .btn-dark:hover { background: var(--bark); }
+
+  /* FOOTER */
+  footer {
+    background: #100d05;
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    border-top: 1px solid rgba(122,173,46,0.1);
+  }
+
+  .footer-brand {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--lime);
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand span { color: var(--wheat); }
+
+  .footer-tagline {
+    font-size: 0.82rem;
+    color: rgba(245,240,225,0.35);
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 220px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lime);
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .footer-col ul li a {
+    font-size: 0.82rem;
+    color: rgba(245,240,225,0.4);
+    text-decoration: none;
+    font-weight: 300;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--cream); }
+
+  .footer-bottom {
+    background: #100d05;
+    padding: 1.5rem 4rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: rgba(245,240,225,0.25);
+    font-weight: 300;
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="IMG_1789.png" alt="Green Harvest Agrochemical Solutions" style="height:48px; width:auto; display:block;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#audience">Who We Serve</a></li>
+    <li><a href="tel:+919731707153" style="color:var(--teal)!important; opacity:1!important;">📞 +91 97317 07153</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Agrochemical Solutions</div>
+    <h1 class="hero-title">
+      Grow More.<br>
+      Protect More.
+      <em>Harvest More.</em>
+    </h1>
+    <p class="hero-desc">
+      Green Harvest delivers science-backed agrochemical solutions — from pesticides and herbicides to fertilizers — trusted by farmers and distributors across the country.
+    </p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Explore Products</a>
+      <a href="#contact" class="btn-outline">Talk to an Expert</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Product Range</div>
+      </div>
+      <div>
+        <div class="stat-num">10K+</div>
+        <div class="stat-label">Farmers Served</div>
+      </div>
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years of Trust</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-field">
+      <div style="position:relative; width:400px; height:400px; display:flex; align-items:center; justify-content:center;">
+        <div class="circle-glow"></div>
+        <img src="IMG_1789.png" alt="Green Harvest" class="plant-icon" style="width:280px; height:280px; object-fit:contain; filter: drop-shadow(0 0 32px rgba(106,191,62,0.25));">
+        <!-- floating tags -->
+        <div class="float-tag" style="top:15%; left:0%;">🌱 Crop Protection</div>
+        <div class="float-tag" style="top:50%; right:-2%;">⚗ Soil Nutrients</div>
+        <div class="float-tag" style="bottom:14%; left:4%;">🌾 Higher Yield</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <div class="section-label">Our Range</div>
+  <h2 class="section-title">Complete agrochemical solutions for every crop challenge</h2>
+
+  <div class="products-grid fade-up">
+    <div class="product-card">
+      <div class="product-icon">🐛</div>
+      <div class="product-name">Pesticides & Insecticides</div>
+      <p class="product-desc">Targeted pest control formulations that protect crops without disrupting soil health or beneficial organisms.</p>
+      <a href="#" class="product-link">View Range →</a>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🌿</div>
+      <div class="product-name">Herbicides</div>
+      <p class="product-desc">Selective and broad-spectrum weedkillers engineered for fast action and minimal crop stress.</p>
+      <a href="#" class="product-link">View Range →</a>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">⚗️</div>
+      <div class="product-name">Fertilizers & Nutrients</div>
+      <p class="product-desc">Macro and micronutrient formulas designed to maximize soil fertility and boost plant growth cycles.</p>
+      <a href="#" class="product-link">View Range →</a>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🛡️</div>
+      <div class="product-name">Fungicides</div>
+      <p class="product-desc">Advanced antifungal solutions to prevent and eliminate disease outbreaks before they damage yields.</p>
+      <a href="#" class="product-link">View Range →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section" id="why">
+  <div>
+    <div class="section-label">Why Green Harvest</div>
+    <h2 class="section-title fade-up">Trusted science. Real results. Every season.</h2>
+    <div class="feature-list fade-up">
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <div>
+          <div class="feature-title">Scientifically Formulated</div>
+          <p class="feature-text">Every product is developed with agronomists and tested across diverse soil and climate conditions before reaching the field.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <div>
+          <div class="feature-title">Regulatory Compliant</div>
+          <p class="feature-text">All Green Harvest products meet national and international regulatory standards, giving you peace of mind at every application.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <div>
+          <div class="feature-title">Expert Field Support</div>
+          <p class="feature-text">Our agronomy team is available to help farmers and distributors select the right product mix for specific crops and regions.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <div>
+          <div class="feature-title">Distributor Network</div>
+          <p class="feature-text">Wide-reach distribution infrastructure ensures product availability across rural and semi-urban markets without delays.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="why-visual fade-up">
+    <div style="font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--lime); font-weight:500; margin-bottom:1rem;">Performance Metrics</div>
+
+    <div class="metric-row">
+      <div class="metric-header">
+        <span class="metric-label">Crop yield improvement</span>
+        <span class="metric-value">+38%</span>
+      </div>
+      <div class="metric-bar"><div class="metric-fill" style="--target-width:78%"></div></div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-header">
+        <span class="metric-label">Pest control effectiveness</span>
+        <span class="metric-value">94%</span>
+      </div>
+      <div class="metric-bar"><div class="metric-fill" style="--target-width:94%"></div></div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-header">
+        <span class="metric-label">Distributor reorder rate</span>
+        <span class="metric-value">87%</span>
+      </div>
+      <div class="metric-bar"><div class="metric-fill" style="--target-width:87%"></div></div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-header">
+        <span class="metric-label">Farmer satisfaction score</span>
+        <span class="metric-value">4.8/5</span>
+      </div>
+      <div class="metric-bar"><div class="metric-fill" style="--target-width:96%"></div></div>
+    </div>
+
+    <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(122,173,46,0.15); font-size:0.75rem; color:rgba(245,240,225,0.3); font-weight:300;">
+      Based on field trials and customer surveys across 6 states, 2023–24 season.
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="audience-section" id="audience">
+  <div class="section-label">Who We Serve</div>
+  <h2 class="section-title fade-up">Built for both ends of the agri supply chain</h2>
+  <div class="audience-grid fade-up">
+    <div class="audience-card">
+      <span class="audience-tag">For Farmers</span>
+      <h3 class="audience-title">Grow more with less guesswork</h3>
+      <p class="audience-text">Whether you grow paddy, wheat, cotton, or vegetables — Green Harvest has the right solution for your soil, your crop, and your season.</p>
+      <ul class="audience-benefits">
+        <li>Crop-specific product recommendations</li>
+        <li>Affordable pack sizes for small & large farms</li>
+        <li>Easy application guidance in local languages</li>
+        <li>Direct access to agronomy helpline</li>
+      </ul>
+      <br>
+      <a href="#contact" class="btn-primary" style="font-size:0.82rem; padding:0.7rem 1.5rem;">Find Products for My Crop</a>
+    </div>
+
+    <div class="audience-card">
+      <span class="audience-tag">For Distributors</span>
+      <h3 class="audience-title">A brand farmers already trust</h3>
+      <p class="audience-text">Partner with Green Harvest to stock a full-range portfolio with strong farmer pull, reliable margins, and dedicated trade support.</p>
+      <ul class="audience-benefits">
+        <li>Competitive trade margins & volume incentives</li>
+        <li>Marketing and POS materials provided</li>
+        <li>Dedicated key account manager</li>
+        <li>Flexible credit terms for established partners</li>
+      </ul>
+      <br>
+      <a href="#contact" class="btn-outline" style="font-size:0.82rem; padding:0.7rem 1.5rem;">Become a Distributor</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip" id="contact">
+  <div class="cta-text">Ready to take your harvest to the next level?</div>
+  <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+    <a href="tel:+919731707153" class="btn-dark" style="background:var(--navy); color:var(--teal);">📞 +91 97317 07153</a>
+    <a href="mailto:hello@greenharvestagro.com" class="btn-dark">Email Our Team</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <img src="IMG_1789.png" alt="Green Harvest" style="height:56px; width:auto; margin-bottom:1rem; display:block; filter:brightness(1.1);">
+    <p class="footer-tagline">Science-backed agrochemical solutions for farmers and distributors across India.</p>
+    <p style="margin-top:0.75rem; font-size:0.85rem; color:var(--teal);">📞 +91 97317 07153</p>
+  </div>
+  <div class="footer-col">
+    <h4>Products</h4>
+    <ul>
+      <li><a href="#">Pesticides</a></li>
+      <li><a href="#">Herbicides</a></li>
+      <li><a href="#">Fertilizers</a></li>
+      <li><a href="#">Fungicides</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <ul>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Research & Dev</a></li>
+      <li><a href="#">Careers</a></li>
+      <li><a href="#">News</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Connect</h4>
+    <ul>
+      <li><a href="#">Contact Us</a></li>
+      <li><a href="#">Distributor Login</a></li>
+      <li><a href="#">Crop Helpline</a></li>
+      <li><a href="#">WhatsApp Support</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span class="footer-copy">© 2026 Green Harvest Agrochemical Solutions. All rights reserved.</span>
+  <span class="footer-copy">Privacy Policy · Terms of Use</span>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), 
